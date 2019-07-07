@@ -9,7 +9,7 @@ class App extends Component {
     return ( 
       <div className ="container">
         <Header
-        titulo="Administrador Pacientes Veterinaria"
+        titulo="Verinaria de Sandy"
         />
         <div className='row'>
           <div className='col-md10 mx-auto'>
