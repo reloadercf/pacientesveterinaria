@@ -12,7 +12,7 @@ class NuevaCita extends Component {
     //para que funcione el siguiente snipet el state tiene que ser
     // igual a la propiedad que tiene el input en el state
     //y con eso va a funcionar
-
+    //handleChamnge cuando el usuario escribe en los inputs
     handleChange=(e)=>{
         //formas de acceder a los valores
         console.log(e.target.name+': '+e.target.value);
@@ -23,8 +23,29 @@ class NuevaCita extends Component {
             cita:{
                 ...this.state.cita,
                 [e.target.name]:e.target.value
-            }
+            },
+            error:false
         })
+    }
+
+    //cuando el usuario envia el formulario
+    handleSubmit=e=>{
+        e.preventDefault()
+        //primero vamos a validar que todos los campos esten llenos
+        //si todo esta bien agregamos la cita al state de la app
+
+        //extraer los valores con destructuring
+        let {mascota,propietario,fecha,hora,sintomas}=this.state.cita
+
+        //validar todos los campos
+        if(mascota===''||propietario===''||fecha===''||hora===''||sintomas===''){
+            this.setState({
+                error:true
+            })
+            //detener la ejecucion del if con un return 
+            return
+        }
+
     }
 
 
@@ -36,7 +57,9 @@ class NuevaCita extends Component {
                     <h2 className="card-title text-center mb-5">
                         Llena el formulario para crear una nueva cita
                     </h2>
-                    <form>
+                    <form
+                    onSubmit={this.handleSubmit}
+                    >
                         <div className='form-group row'>
                             <label className="col-sm-4 col-lg-2 col-form-label">Nombre mascota</label>
                             <div className="col-sm-8 col-lg-10">
