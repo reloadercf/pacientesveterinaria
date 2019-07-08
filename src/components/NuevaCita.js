@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import uuid from 'uuid'
 
+let stateInicial= { cita:{
+    mascota:'',
+    propietario:'',
+    fecha:'',
+    hora:'',
+    sintomas:'',
+}, 
+error:false
+ }
+
 class NuevaCita extends Component {
-    state = { cita:{
-        mascota:'',
-        propietario:'',
-        fecha:'',
-        hora:'',
-        sintomas:'',
-    } }
+    state = { ...stateInicial}
 
 
     //para que funcione el siguiente snipet el state tiene que ser
@@ -54,18 +58,27 @@ class NuevaCita extends Component {
 
         //agregar la cita al state
         this.props.crearNuevaCita(nuevaCita)
+        //colocar en el state el state inicial
+        this.setState({
+            ...stateInicial
+        })
 
     }
 
 
 
     render() { 
+
+        //extraer el valor del state
+        let {error}=this.state
+
         return ( 
             <div className="card mt-5 py-5">
                 <div className='card-body'>
                     <h2 className="card-title text-center mb-5">
                         Llena el formulario para crear una nueva cita
                     </h2>
+                    {error?<div className="alert alert-danger mt-2 md-5 text-center">todos los campos son obligatorios</div>:null}
                     <form
                     onSubmit={this.handleSubmit}
                     >
