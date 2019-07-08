@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import uuid from 'uuid'
+
 class NuevaCita extends Component {
     state = { cita:{
         mascota:'',
@@ -45,6 +47,13 @@ class NuevaCita extends Component {
             //detener la ejecucion del if con un return 
             return
         }
+
+        //generar objeto con los datos para pasarle la nueva cita
+        let nuevaCita={...this.state.cita}
+        nuevaCita.id=uuid()
+
+        //agregar la cita al state
+        this.props.crearNuevaCita(nuevaCita)
 
     }
 
