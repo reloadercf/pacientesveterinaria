@@ -1,6 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-let Cita =({cita})=>(
+let Cita =({cita,eliminarCita})=>(
     <div className='media mt-3'>
         <div className='media-body'>
             <h3 className='mt-0'>{cita.mascota}</h3>
@@ -20,7 +21,16 @@ let Cita =({cita})=>(
                 <span>Sintomas:</span>
             </p>
             <p className='card-text'>{cita.sintomas}</p>
+
+            <button
+                className="btn btn-danger"
+                onClick={()=>eliminarCita(cita.id)}
+            >Borrar &times;</button>
         </div>
     </div>
 )
+Cita.propTypes={
+    cita:PropTypes.object.isRequired,
+    eliminarCita:PropTypes.func.isRequired
+}
 export default Cita
